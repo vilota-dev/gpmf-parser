@@ -81,7 +81,7 @@ GPMF_ERR readMP4File(char* filename);
 int read_mp4(char* mp4Directory, char* flag_f)
 {
 	char outputFileName[8]; 
-	snprintf(outputFileName, sizeof(outputFileName), "../../python/fourccdata/%s.txt", flag_f);
+	snprintf(outputFileName, sizeof(outputFileName), "../../../vk_tools\src\govbag\python\fourccdata/%s.txt", flag_f);
 
     openOutputFile(outputFileName);
 
