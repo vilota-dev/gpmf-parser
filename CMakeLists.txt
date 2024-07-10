@@ -8,7 +8,7 @@ set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 file(GLOB LIB_SOURCES "GPMF_parser.c" "GPMF_utils.c" "demo/GPMF_demo.c" "demo/GPMF_print.c" "demo/GPMF_mp4reader.c")
 file(GLOB LIB_HEADERS "GPMF_bitstream.h" "GPMF_common.h" "GPMF_parser.h" "GPMF_utils.h" "demo/GPMF_print.h" "demo/GPMF_demo.h")
 
-add_library(GPMF_PARSER_LIB SHARED ${LIB_SOURCES} ${LIB_HEADERS})
+add_library(GPMF_PARSER_LIB PRIVATE ${LIB_SOURCES} ${LIB_HEADERS})
 set_target_properties(GPMF_PARSER_LIB PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 
 set(PC_LINK_FLAGS "-l${PROJECT_NAME}")
