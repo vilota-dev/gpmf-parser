@@ -80,9 +80,26 @@ GPMF_ERR readMP4File(char* filename);
 
 int read_mp4(char* mp4Directory, char* flag_f)
 {
-	char outputFileName[8]; 
-	snprintf(outputFileName, sizeof(outputFileName), "../../../vk_tools/src/govbag/python/fourccdata/%s.txt", flag_f);
+	char outputFileName[256]; 
+	char directoryPath[256];
 
+	strncpy_s(directoryPath, sizeof(directoryPath), mp4Directory, sizeof(directoryPath) - 1);
+
+	char* lastSlash = strrchr(directoryPath, '/');
+    if (lastSlash == NULL) {
+        lastSlash = strrchr(directoryPath, '\\'); // Handle Windows path separators
+    }
+
+	// If a directory separator was found, terminate the string there
+    if (lastSlash != NULL) {
+        *(lastSlash + 1) = '\0'; // Add null terminator after the last slash
+    } else {
+        // No directory separator found, use the current directory
+        directoryPath[0] = '\0'; // Use the root directory
+    }
+
+	snprintf(outputFileName, sizeof(outputFileName), "%s%s.txt", directoryPath, flag_f);
+    
     openOutputFile(outputFileName);
 
 	GPMF_ERR ret = GPMF_OK;
@@ -162,8 +179,7 @@ char* CorruptTheMP4(char* filename)
 
 GPMF_ERR readMP4File(char* filename)
 {
-	openOutputFile("output.txt");
-
+	
 	GPMF_ERR ret = GPMF_OK;
 	GPMF_stream metadata_stream = { 0 }, * ms = &metadata_stream;
 	double metadatalength;
